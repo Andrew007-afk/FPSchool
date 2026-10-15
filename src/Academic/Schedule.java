@@ -1,0 +1,46 @@
+package Academic;
+
+import java.time.LocalTime;
+
+public class Schedule {
+    private int idTeacher;
+    private int idSubject;
+    private LocalTime hora;
+
+    public Schedule(int idTeacher, int idSubject, LocalTime hora){
+        this.idTeacher = idTeacher;
+        this.idSubject = idSubject;
+        this.hora = hora;
+    }
+
+    public int getIdTeacher() {
+        return idTeacher;
+    }
+
+    public void setIdTeacher(int idTeacher) {
+        this.idTeacher = idTeacher;
+    }
+
+    public LocalTime getHora() {
+        return hora;
+    }
+
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
+    }
+
+    public int getIdSubject() {
+        return idSubject;
+    }
+
+    public void setIdSubject(int idSubject) {
+        this.idSubject = idSubject;
+    }
+
+    public String toString(){
+        return "=== Schedule ====" + "\n"
+                + "ID Teacher: " + idTeacher + "\n" +
+                "ID Subject: " + idSubject + "\n" +
+                "Hora: " + hora + "\n";
+    }
+}
