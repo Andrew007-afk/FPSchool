@@ -51,11 +51,10 @@ public class Subject {
     }
 
     public String toString(){
-        return "=== Subject ====" + "\n"
-                + "id: " + id + "\n" +
-                "Nombre: " + name + "\n" +
-                "Programm: " + programm + "\n" +
-                "Course: " + course + "\n";
+        return id + " | " +
+                name + " | " +
+                programm + " | " +
+                course + " | ";
 
     }
 }

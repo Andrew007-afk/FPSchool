@@ -24,8 +24,8 @@ public class Test {
         Enrollment e2 = new Enrollment(2, 2, LocalDate.of(2025, 9, 2));
 
         // ---- Schedules (Teacher + Subject) ----
-        Schedule h1 = new Schedule(1, 1, LocalTime.of(8, 30));
-        Schedule h2 = new Schedule(2, 2, LocalTime.of(10, 15));
+        Schedule h1 = new Schedule(1, 1, 1);
+        Schedule h2 = new Schedule(2, 2, 2);
 
         // ---- Grades (Student + Subject) ----
         Grade g1 = new Grade(1, 1, 9);
