@@ -36,10 +36,9 @@ public class Student {
     }
 
     public String toString(){
-        return "=== Student ===="+ "\n"
-                + "id: " + id + "\n" +
-                "Nombre: " + name + "\n" +
-                "Email: " + email + "\n";
+        return id + " | " +
+               name + " | " +
+               email + " | ";
 
     }
 }

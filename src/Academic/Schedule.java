@@ -5,9 +5,9 @@ import java.time.LocalTime;
 public class Schedule {
     private int idTeacher;
     private int idSubject;
-    private LocalTime hora;
+    private int hora;
 
-    public Schedule(int idTeacher, int idSubject, LocalTime hora){
+    public Schedule(int idTeacher, int idSubject, int hora){
         this.idTeacher = idTeacher;
         this.idSubject = idSubject;
         this.hora = hora;
@@ -21,11 +21,11 @@ public class Schedule {
         this.idTeacher = idTeacher;
     }
 
-    public LocalTime getHora() {
+    public int getHora() {
         return hora;
     }
 
-    public void setHora(LocalTime hora) {
+    public void setHora(int hora) {
         this.hora = hora;
     }
 
