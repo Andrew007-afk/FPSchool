@@ -36,10 +36,6 @@ public class Teacher {
     }
 
     public String toString(){
-        return "=== Teacher ====" + "\n"
-                + "id: " + id + "\n" +
-                "Nombre: " + name + "\n" +
-                "Speciality: " + speciality + "\n";
-
+        return id + "|" + name + "|" + speciality;
     }
 }
