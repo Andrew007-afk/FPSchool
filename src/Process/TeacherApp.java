@@ -4,6 +4,8 @@ import Academic.Teacher;
 
 import java.io.*;
 import java.nio.Buffer;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class TeacherApp {
     private int idTeacher;
@@ -129,4 +131,173 @@ public class TeacherApp {
             throw new RuntimeException(e);
         }
     }
+
+    public void viewGrades(){
+        try(BufferedReader br = new BufferedReader(new FileReader("Data/schedules.txt"))){
+            String infoSchedule;
+            while((infoSchedule = br.readLine()) != null){
+                String[] data = infoSchedule.split("\\|");
+                int idTeaSch = Integer.parseInt(data[0]);
+                int idSubSch = Integer.parseInt(data[1]);
+
+                if(idTeaSch == idTeacher){
+
+
+                    try(BufferedReader br2 = new BufferedReader(new FileReader("Data/subjects.txt"))){
+                        String infoSubject;
+                        while((infoSubject = br2.readLine()) != null){
+                            String[] dataSubject = infoSubject.split("\\|");
+                            int idSubject = Integer.parseInt(dataSubject[0]);
+                            String nameSubject = dataSubject[1];
+
+                            if(idSubject == idSubSch){
+                                try(BufferedReader br3 = new BufferedReader(new FileReader("Data/enrrollment.txt"))){
+                                    String infoEnrollment;
+                                    while((infoEnrollment = br3.readLine()) != null){
+                                        String[] dataEnrrollent = infoEnrollment.split("\\|");
+                                        int idEstEnr = Integer.parseInt(dataEnrrollent[0]);
+                                        int idSubEnr = Integer.parseInt(dataEnrrollent[1]);
+
+                                        if(idSubEnr == idSubject){
+
+
+                                            try(BufferedReader br4 = new BufferedReader(new FileReader("Data/students.txt"))){
+                                                String infoStudents;
+                                                while((infoStudents = br4.readLine()) != null){
+                                                    String[] dataStudents = infoStudents.split("\\|");
+                                                    int idEstEst = Integer.parseInt(dataStudents[0]);
+                                                    String estName = dataStudents[1];
+                                                    if (idEstEst == idEstEnr){
+
+                                                        try (BufferedReader br5 = new BufferedReader(new FileReader("Data/grades.txt"))){
+                                                            String infoGrades;
+                                                            while((infoGrades = br5.readLine()) != null){
+                                                                String[] dataGrades = infoGrades.split("\\|");
+                                                                int idEstGra = Integer.parseInt(dataGrades[0]);
+                                                                int idSubGra = Integer.parseInt(dataGrades[1]);
+                                                                int grade = Integer.parseInt(dataGrades[2]);
+
+                                                                if(idEstGra == idEstEst && idSubject == idSubGra){
+                                                                    System.out.println(estName + " | " + nameSubject + " | " + grade);
+                                                                }
+
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void viewAsistences(){
+        ArrayList<Integer> idSubjectsTech = foundSubject(idTeacher);
+        String dataAttendance;
+        try(BufferedReader brAttendance = new BufferedReader(new FileReader("Data/attendances.txt"))) {
+            while((dataAttendance = brAttendance.readLine()) != null){
+                String[] infoAttendance = dataAttendance.split("\\|");
+                int idStuAtten = Integer.parseInt(infoAttendance[0]);
+                int idSubAtten = Integer.parseInt(infoAttendance[1]);
+                LocalDate date = LocalDate.parse(infoAttendance[2]);
+
+                for(int i : idSubjectsTech){
+                    if(idSubAtten == i){
+                        System.out.println(loadEstudent(idStuAtten) + " | " + loadSubject(idStuAtten) + " | " + date);
+                    }
+                }
+
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public ArrayList<Integer> foundSubject(int id){
+        String data;
+        int idTeacher = 0;
+        int idSubject = 0;
+        ArrayList<Integer> subjects = new ArrayList<>();
+
+        try(BufferedReader br = new BufferedReader(new FileReader("Data/schedules.txt"))){
+            while((data = br.readLine()) != null){
+                String[] info = data.split("\\|");
+                idTeacher = Integer.parseInt(info[0]);
+                idSubject = Integer.parseInt(info[1]);
+
+                if(id == idTeacher){
+                    subjects.add(idSubject);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return subjects;
+
+    }
+
+    public String loadEstudent(int id){
+        String name = "";
+        try(BufferedReader br = new BufferedReader(new FileReader("Data/students.txt"))){
+            String infoStudents;
+            while((infoStudents = br.readLine()) != null){
+                String[] dataStudents = infoStudents.split("\\|");
+                int idStudent = Integer.parseInt(dataStudents[0]);
+                String nameStudent = dataStudents[1];
+
+                if(id == idStudent){
+                    name = nameStudent;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return name;
+    }
+
+    public String loadSubject(int id){
+
+        String name = "";
+        try(BufferedReader br = new BufferedReader(new FileReader("Data/subjects.txt"))){
+            String infoSubjects;
+            while((infoSubjects = br.readLine()) != null){
+                String[] dataSubjects = infoSubjects.split("\\|");
+                int idStudent = Integer.parseInt(dataSubjects[0]);
+                String nameSubject = dataSubjects[1];
+
+                if(id == idStudent){
+                    name = nameSubject;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return name;
+    }
+
+
 }

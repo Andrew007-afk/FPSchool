@@ -5,6 +5,8 @@ public class FPSystem {
         AdminApp testAdmin = new AdminApp();
 
         TeacherApp test = new TeacherApp(2);
-        test.viewStudent();
+        test.viewAsistences();
+
+
     }
 }
